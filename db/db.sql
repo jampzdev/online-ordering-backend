@@ -29,11 +29,6 @@ CREATE TABLE `admin_tbl` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
-/*Data for the table `admin_tbl` */
-
-insert  into `admin_tbl`(`id`,`fname`,`mname`,`lname`,`email`,`passhash`,`is_active`) values 
-(1,'j','r','j','jaydev@yopmail.com','202cb962ac59075b964b07152d234b70','1');
-
 /*Table structure for table `brands_tbl` */
 
 CREATE TABLE `brands_tbl` (
@@ -43,31 +38,15 @@ CREATE TABLE `brands_tbl` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 
-/*Data for the table `brands_tbl` */
-
-insert  into `brands_tbl`(`id`,`brand_name`,`is_active`) values 
-(1,'','1'),
-(12,'MAXIS','1');
-
 /*Table structure for table `categories_tbl` */
 
 CREATE TABLE `categories_tbl` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `category_name` varchar(100) DEFAULT NULL,
+  `img` varchar(200) DEFAULT NULL,
   `is_active` enum('0','1') DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
-
-/*Data for the table `categories_tbl` */
-
-insert  into `categories_tbl`(`id`,`category_name`,`is_active`) values 
-(12,'WHEELS','1'),
-(13,'FRAME','1'),
-(14,'SET','1'),
-(15,'FORK','1'),
-(16,'BRAKES','1'),
-(17,'QUILL STEM','1'),
-(18,'STEM','1');
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
 
 /*Table structure for table `inventory_tbl` */
 
@@ -78,30 +57,32 @@ CREATE TABLE `inventory_tbl` (
   `product_color` bigint(20) DEFAULT NULL,
   `quantity` int(11) DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
 
-/*Data for the table `inventory_tbl` */
+/*Table structure for table `orders_products_tbl` */
 
-insert  into `inventory_tbl`(`id`,`product_id`,`product_size`,`product_color`,`quantity`) values 
-(1,5,9,13,0),
-(2,5,10,14,0),
-(3,5,10,15,0),
-(4,6,11,16,0),
-(5,6,11,17,0),
-(6,6,12,18,0),
-(7,6,13,19,0),
-(8,6,13,20,0),
-(9,6,13,21,0),
-(10,7,14,22,0),
-(11,8,15,23,0),
-(12,9,16,24,0),
-(13,10,17,25,0),
-(14,10,17,26,0),
-(15,11,18,27,0),
-(16,11,18,28,0),
-(17,12,19,29,0),
-(18,12,19,30,0),
-(19,12,20,31,0);
+CREATE TABLE `orders_products_tbl` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `order_id` bigint(20) DEFAULT NULL,
+  `product_id` bigint(20) DEFAULT NULL,
+  `size` varchar(20) DEFAULT NULL,
+  `color` varchar(20) DEFAULT NULL,
+  `quantity` int(11) NOT NULL,
+  `total_price` double(10,2) DEFAULT NULL,
+  PRIMARY KEY (`id`,`quantity`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+
+/*Table structure for table `orders_tbl` */
+
+CREATE TABLE `orders_tbl` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `user_id` bigint(20) DEFAULT NULL,
+  `payment_method` varchar(20) DEFAULT NULL,
+  `order_status` enum('Pending','Shipped','Delivered','Picked Up') DEFAULT 'Pending',
+  `grand_total` double(10,2) DEFAULT NULL,
+  `date_created` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 
 /*Table structure for table `product_colors_tbl` */
 
@@ -113,30 +94,7 @@ CREATE TABLE `product_colors_tbl` (
   `color_name` varchar(100) DEFAULT NULL,
   `add_price` double(10,2) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=latin1;
-
-/*Data for the table `product_colors_tbl` */
-
-insert  into `product_colors_tbl`(`id`,`product_id`,`size_id`,`size_name`,`color_name`,`add_price`) values 
-(13,5,9,'large','red',200.00),
-(14,5,10,'small','red',0.00),
-(15,5,10,'small','blue',0.00),
-(16,6,11,'large','red',0.00),
-(17,6,11,'large','blue',0.00),
-(18,6,12,'small','green',0.00),
-(19,6,13,'medium','red',0.00),
-(20,6,13,'medium','green',0.00),
-(21,6,13,'medium','black',5.00),
-(22,7,14,'small','red',0.00),
-(23,8,15,'large','red',0.00),
-(24,9,16,'hehe','red',20.00),
-(25,10,17,'large','red',10.00),
-(26,10,17,'large','blue',10.00),
-(27,11,18,'large','red',10.00),
-(28,11,18,'large','blue',10.00),
-(29,12,19,'large','red',50.00),
-(30,12,19,'large','blue',60.00),
-(31,12,20,'medium','red',45.00);
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=latin1;
 
 /*Table structure for table `product_sizes_tbl` */
 
@@ -146,24 +104,7 @@ CREATE TABLE `product_sizes_tbl` (
   `size_name` varchar(100) DEFAULT NULL,
   `price` double(10,2) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=latin1;
-
-/*Data for the table `product_sizes_tbl` */
-
-insert  into `product_sizes_tbl`(`id`,`product_id`,`size_name`,`price`) values 
-(9,5,'large',500.00),
-(10,5,'small',122.00),
-(11,6,'large',800.00),
-(12,6,'small',500.00),
-(13,6,'medium',600.00),
-(14,7,'small',500.00),
-(15,8,'large',500.00),
-(16,9,'hehe',50.00),
-(17,10,'large',50.00),
-(18,11,'large',50.00),
-(19,12,'large',5000.00),
-(20,12,'medium',4000.00),
-(21,12,'small 25.5cm',3000.00);
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=latin1;
 
 /*Table structure for table `product_varieties_tbl` */
 
@@ -179,8 +120,6 @@ CREATE TABLE `product_varieties_tbl` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-/*Data for the table `product_varieties_tbl` */
-
 /*Table structure for table `products_tbl` */
 
 CREATE TABLE `products_tbl` (
@@ -194,19 +133,6 @@ CREATE TABLE `products_tbl` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
 
-/*Data for the table `products_tbl` */
-
-insert  into `products_tbl`(`id`,`product_name`,`product_desc`,`category_id`,`brand_id`,`img`,`is_active`) values 
-(5,'sadas','das',12,12,'1621102264027.jpeg','1'),
-(6,'dsafdsa','fdsafsd',12,12,'1621102264027.jpeg','1'),
-(7,'fdsafdsa','fdsaf',12,12,'1621102264027.jpeg','1'),
-(8,'BIKE','SDAFDSAFSAD',12,12,'1621102264027.jpeg','1'),
-(9,'sadfdsaf','dsafdsafdsa',12,12,'1621102264027.jpeg','1'),
-(10,'dsafdsa','fdsafdsaf',12,12,'1621106308887.png','1'),
-(11,'dsafdsa','fdsafdsaf',12,12,'1621106391818.jpeg','1'),
-(12,'1 SET NG BIKE','dsafdsafsda fsda fsda fsda',14,12,'1621178174831.jpeg','1'),
-(13,'1 SET NG BIKE','dsafdsafsda fsda fsda fsda',14,12,'1621178230780.jpeg','1');
-
 /*Table structure for table `users_tbl` */
 
 CREATE TABLE `users_tbl` (
@@ -219,9 +145,7 @@ CREATE TABLE `users_tbl` (
   `date_created` varchar(50) DEFAULT NULL,
   `is_active` enum('0','1') DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-/*Data for the table `users_tbl` */
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 /*Table structure for table `varieties_tbl` */
 
@@ -233,11 +157,15 @@ CREATE TABLE `varieties_tbl` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
-/*Data for the table `varieties_tbl` */
+/* Trigger structure for table `orders_tbl` */
 
-insert  into `varieties_tbl`(`id`,`variety_name`,`is_priceable`,`is_active`) values 
-(1,'SIZE','1','1'),
-(2,'COLOR','0','1');
+DELIMITER $$
+
+/*!50003 CREATE */ /*!50017 DEFINER = 'teamlms'@'localhost' */ /*!50003 TRIGGER `setCurrentDateOrders` BEFORE INSERT ON `orders_tbl` FOR EACH ROW  
+ set New.date_created = Now() */$$
+
+
+DELIMITER ;
 
 /* Trigger structure for table `product_colors_tbl` */
 
