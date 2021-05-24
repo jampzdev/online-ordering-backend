@@ -76,7 +76,9 @@ exports.get = async function(){
             product_desc            : elem.product_desc,
             category_name           : elem.category_name,
             brand_name              : elem.brand_name,  
-            sizes                   : sizes
+            sizes                   : sizes,
+            img                     : "http://localhost:3001/"+elem.img,
+
         }
         arr.push(tmp)
     })

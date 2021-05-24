@@ -9,6 +9,8 @@ var categoy_router      = require('./routes/category_router')
 var product_router      = require('./routes/product_router')
 var varieties_router    = require('./routes/varieties_router')
 var admin_router        = require('./routes/admin_router')
+var orders_router       = require('./routes/orders_router')
+var inventory_router    = require('./routes/inventory_router')
 
 var upload_router       = require('./routes/upload_router')
 
@@ -25,8 +27,9 @@ app.use("/category",categoy_router)
 app.use("/product",product_router)
 app.use("/varieties",varieties_router)
 app.use("/admin",admin_router)
+app.use("/orders",orders_router)
+app.use("/inventory",inventory_router)
+
 app.use("/upload",upload_router)
-
-
 
 app.listen(3001, () => console.log('Express server is running at port no : 3001'));

@@ -2,9 +2,9 @@
 var conn   = require('../services/mysql_service')
 
 exports.save = async function(req){
-    var query   = "INSERT INTO categories_tbl(category_name)VALUES(?)"
+    var query   = "INSERT INTO categories_tbl(category_name,img)VALUES(?,?)"
 
-    const result = await conn.executeQuery(query, [req.body.category_name]).then(results => results);
+    const result = await conn.executeQuery(query, [req.body.category_name,req.body.img]).then(results => results);
 
     
     return true
@@ -17,6 +17,8 @@ exports.get = async function(){
     const arr    = result.map((item,index)=>({
         id                  : item.id,
         category_name          : item.category_name,
+        img                     : "http://localhost:3001/"+item.img,
+
     })) 
     
     return arr
