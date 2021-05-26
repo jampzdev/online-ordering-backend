@@ -78,3 +78,10 @@ exports.getSpecificDetails = async function(req){
     
     return arr
 }
+
+exports.changeStatus = async function(req){
+    var query   = "UPDATE orders_tbl SET order_status = ? WHERE id = ?"
+    const result = await conn.getQuery(query, [req.body.order_status,req.body.key]).then(results => results);
+
+    return true
+}

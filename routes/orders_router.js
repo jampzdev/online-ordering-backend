@@ -19,5 +19,8 @@ router.post('/get-specific-details', function (req, res, next) {
     orders_ctr.getSpecificDetails(req, res, next)
 })
 
+router.post('/change-status', function (req, res, next) {
+    orders_ctr.changeStatus(req, res, next)
+})
 
 module.exports = router

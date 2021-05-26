@@ -35,3 +35,12 @@ exports.getSpecificDetails= async function (req, res, next) {
         devMessage: qryRes
     })
 }
+
+exports.changeStatus= async function (req, res, next) {
+    const qryRes = await orders_mdl.changeStatus(req)
+    
+    res.json({
+        statusCode: 200,
+        devMessage: qryRes
+    })
+}
