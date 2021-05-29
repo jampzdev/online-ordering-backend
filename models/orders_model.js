@@ -85,3 +85,41 @@ exports.changeStatus = async function(req){
 
     return true
 }
+
+exports.getTableCount = async function(req){
+    let body = req.body;
+    let table_name = 'orders_tbl';
+    let field_name = 'order_status';
+    let value      = 'Pending'
+    let has_condition = '1';
+    let query = ''
+
+
+    if(req.body.field_name != ''){
+        field_name = req.body.field_name
+    }
+    if(req.body.field_name != ''){
+        table_name = req.body.table_name
+    }
+    if(req.body.field_name != ''){
+        value = req.body.value
+    }
+    if(req.body.has_condition != null){
+        has_condition = req.body.has_condition
+    }
+
+    if(has_condition == '1'){
+        query   = "SELECT COUNT(*) as count FROM "+table_name+" WHERE "+field_name+" = ?"
+    }
+    else{
+        query   = "SELECT COUNT(*) as count FROM "+table_name
+    }
+
+    const result = await conn.getQuery(query,[req.body.value]).then(results => results);
+
+    const arr    = result.map((item,index)=>({
+        count                      : item.count
+    })) 
+    
+    return arr[0].count
+}

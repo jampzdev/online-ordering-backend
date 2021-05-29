@@ -23,4 +23,9 @@ router.post('/change-status', function (req, res, next) {
     orders_ctr.changeStatus(req, res, next)
 })
 
+router.post('/get-table-count', function (req, res, next) {
+    orders_ctr.getTableCount(req, res, next)
+})
+
+
 module.exports = router

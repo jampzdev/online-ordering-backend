@@ -11,6 +11,9 @@ router.post('/get', function (req, res, next) {
     cat_ctrl.get(req, res, next)
 })
 
+router.post('/update', function (req, res, next) {
+    cat_ctrl.update(req, res, next)
+})
 
 module.exports = router
 

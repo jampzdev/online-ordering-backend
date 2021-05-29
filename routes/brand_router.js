@@ -7,6 +7,10 @@ router.post('/save', function (req, res, next) {
     brand_ctrl.save(req, res, next)
 })
 
+router.post('/update', function (req, res, next) {
+    brand_ctrl.update(req, res, next)
+})
+
 router.post('/get', function (req, res, next) {
     brand_ctrl.get(req, res, next)
 })

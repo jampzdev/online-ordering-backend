@@ -10,6 +10,16 @@ exports.save = async function(req){
     return true
 }
 
+exports.update = async function(req){
+    var query   = "UPDATE categories_tbl set category_name = ?,img=? WHERE id = ?"
+
+    const result = await conn.executeQuery(query, [req.body.category_name,req.body.img,req.body.key]).then(results => results);
+
+    
+    return true
+}
+
+
 exports.get = async function(){
     var query   = "SELECT * FROM categories_tbl"
 

@@ -44,3 +44,12 @@ exports.changeStatus= async function (req, res, next) {
         devMessage: qryRes
     })
 }
+
+exports.getTableCount= async function (req, res, next) {
+    const qryRes = await orders_mdl.getTableCount(req)
+    
+    res.json({
+        statusCode: 200,
+        devMessage: qryRes
+    })
+}

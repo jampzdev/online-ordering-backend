@@ -10,6 +10,15 @@ exports.save = async function(req){
     return true
 }
 
+exports.update = async function(req){
+    var query   = "UPDATE brands_tbl set brand_name = ? WHERE id = ?"
+
+    const result = await conn.executeQuery(query, [req.body.brand_name,req.body.key]).then(results => results);
+
+    
+    return true
+}
+
 exports.get = async function(){
     var query   = "SELECT * FROM brands_tbl"
 
